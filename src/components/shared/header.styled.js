@@ -22,4 +22,11 @@ export const HeaderMiddle = styled.div`
    justify-content: center;
 `;
 
-export const HeaderRight = styled.div``;
+export const HeaderRight = styled.div`
+   height: 100%;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+   gap: 2.5rem;
+`;
