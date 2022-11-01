@@ -2,9 +2,9 @@ import Logo from '@shared/logo';
 import { useState } from 'react';
 import Button from '@shared/button';
 import Inputbox from '@shared/inputbox';
-import { SigninContent, SigninDesc, SigninForm, SigninTitle } from '../signin/signin.styled';
-import { SigninButtons, SigninCheck, SigninContainer, SigninNote } from '../signin/signin.styled';
 import { SignupOptions, SignupRole } from './signup.styled';
+import { SigninButtons, SigninContainer, SigninNote } from '../signin/signin.styled';
+import { SigninContent, SigninDesc, SigninForm, SigninTitle } from '../signin/signin.styled';
 
 export default function Signup() {
    const [email, setEmail] = useState('');
