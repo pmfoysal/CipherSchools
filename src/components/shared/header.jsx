@@ -1,5 +1,7 @@
 import Logo from './logo';
+import Searchbox from './searchbox';
 import { HeaderContainer, HeaderContent, HeaderLeft, HeaderMiddle, HeaderRight } from './header.styled';
+import UserWindow from './userWindow';
 
 export default function Header() {
    return (
@@ -8,8 +10,12 @@ export default function Header() {
             <HeaderLeft>
                <Logo />
             </HeaderLeft>
-            <HeaderMiddle></HeaderMiddle>
-            <HeaderRight></HeaderRight>
+            <HeaderMiddle>
+               <Searchbox />
+            </HeaderMiddle>
+            <HeaderRight>
+               <UserWindow />
+            </HeaderRight>
          </HeaderContent>
       </HeaderContainer>
    );
