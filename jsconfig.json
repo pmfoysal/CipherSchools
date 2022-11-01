@@ -18,6 +18,7 @@
          "@servers/*": ["customs/servers/*"],
          "@shared/*": ["components/shared/*"],
          "@contexts/*": ["customs/contexts/*"],
+         "@layouts/*": ["components/layouts/*"],
          "@helpers/*": ["components/helpers/*"],
          "@utilities/*": ["customs/utilities/*"],
          "@middlewares/*": ["customs/middlewares/*"],
