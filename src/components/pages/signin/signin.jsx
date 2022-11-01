@@ -35,7 +35,7 @@ export default function Signin() {
                />
             </SigninButtons>
             <SigninNote>
-               <strong>Note:</strong> By signing in, you agreed our <span>Terms & Conditions</span>. Please read our{' '}
+               <strong>Note:</strong> By signing in, you'll agree our <span>Terms & Conditions</span>. Please read our{' '}
                <span>Privacy Policy</span> carefully.
             </SigninNote>
          </SigninContent>
