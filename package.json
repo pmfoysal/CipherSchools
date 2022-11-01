@@ -1,0 +1,75 @@
+{
+   "name": "video-player-cs",
+   "version": "1.0.0",
+   "private": true,
+   "homepage": "/",
+   "license": "LICENSE",
+   "readme": "README.md",
+   "markdown": "github",
+   "publisher": "@pmfoysal",
+   "description": "VidPlay - A Modern Video Player App Made with ReactJS, ExpressJS & MongoDB!",
+   "author": {
+      "name": "Foysal Ahmmed",
+      "email": "pmfoysal@gmail.com",
+      "url": "https://github.com/pmfoysal"
+   },
+   "categories": [
+      "Programming Languages",
+      "Data Science",
+      "Education",
+      "Language Packs",
+      "Machine Learning",
+      "Other"
+   ],
+   "keywords": [
+      "reactjs",
+      "react-router-dom",
+      "nodejs",
+      "expressjs",
+      "mongodb",
+      "authentication",
+      "video-player",
+      "javascript",
+      "mongoose",
+      "video-streaming"
+   ],
+   "repository": {
+      "type": "git",
+      "url": "git@github.com-pmfoysal:pmfoysal/video-player-cs.git"
+   },
+   "cracoConfig": "src/configs/craco.config.js",
+   "scripts": {
+      "start": "craco start",
+      "build": "craco build"
+   },
+   "dependencies": {
+      "@craco/craco": "^6.4.5",
+      "@iconify/react": "^4.0.0",
+      "axios": "^1.1.3",
+      "craco-alias": "^3.0.1",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-router-dom": "^6.4.2",
+      "react-scripts": "^5.0.1",
+      "react-toastify": "^9.0.8",
+      "sass": "^1.55.0",
+      "styled-components": "^5.3.6",
+      "web-vitals": "^3.0.4"
+   },
+   "eslintConfig": {
+      "extends": [
+         "react-app",
+         "react-app/jest"
+      ]
+   },
+   "browserslist": {
+      "production": [
+         ">0.1%",
+         "last 5 version"
+      ],
+      "development": [
+         ">0.1%",
+         "last 2 version"
+      ]
+   }
+}

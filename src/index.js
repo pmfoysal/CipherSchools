@@ -6,9 +6,9 @@ import reportWebVitals from 'tests/reportWebVitals';
 import AppWrapper from 'components/helpers/appWrapper';
 import * as serviceWorkerRegistration from 'tests/serviceWorkerRegistration';
 
-const pmApp = ReactDOM.createRoot(document.querySelector("[data-app='pmfoysal']"));
+const app = ReactDOM.createRoot(document.querySelector("[data-app='pmfoysal']"));
 
-pmApp.render(
+app.render(
    <React.StrictMode>
       <AppWrapper>
          <App />
@@ -17,4 +17,4 @@ pmApp.render(
 );
 
 reportWebVitals();
-serviceWorkerRegistration.register();
+serviceWorkerRegistration.unregister();

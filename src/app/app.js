@@ -1,7 +1,7 @@
-import {Home} from '@pages';
-import React, {Suspense} from 'react';
+import { Home, Signin } from '@pages';
 import Toaster from '@helpers/toaster';
-import {Route, Routes} from 'react-router-dom';
+import React, { Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 export default function App() {
    return (
@@ -9,6 +9,7 @@ export default function App() {
          <Suspense fallback={<h1>Loading...</h1>}>
             <Routes>
                <Route path='/' element={<Home />} />
+               <Route path='/signin' element={<Signin />} />
             </Routes>
          </Suspense>
          <Toaster />
