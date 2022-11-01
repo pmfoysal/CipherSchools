@@ -23,7 +23,7 @@ export const UserWindowPopup = styled.div`
    position: absolute;
    top: calc(100% + 2.5rem);
    right: -2rem;
-   padding: 2rem;
+   padding: 1.5rem;
    background-color: #ffffff;
    border-radius: 2rem;
    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.025);
