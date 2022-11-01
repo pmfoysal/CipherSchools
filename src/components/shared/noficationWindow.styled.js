@@ -54,11 +54,12 @@ export const NotificationWindowPopup = styled.div`
    flex-direction: column;
    align-items: center;
    justify-content: center;
+   z-index: 50;
 
    button {
       height: 3.6rem;
       font-size: 1.3rem;
-      margin-top: 1rem;
+      margin-top: 1.25rem;
    }
 `;
 

@@ -32,6 +32,7 @@ export const UserWindowPopup = styled.div`
    flex-direction: column;
    align-items: center;
    justify-content: center;
+   z-index: 50;
 `;
 
 export const UserWindowImg = styled.img`
