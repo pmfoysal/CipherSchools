@@ -171,7 +171,8 @@ export const WatchCommentsTitle = styled.h2`
 export const WatchCommentsCards = styled.div`
    display: flex;
    flex-direction: column;
-   gap: 1.5rem;
+   gap: 1rem;
+   margin-top: 2rem;
 `;
 
 export const WatchRight = styled.aside`

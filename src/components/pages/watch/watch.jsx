@@ -1,6 +1,6 @@
 import Layout from '@layouts/layout';
 import Button from '@shared/button';
-import user from '../../../assets/images/user.png';
+import creator from '../../../assets/images/creator.png';
 import { useSearchParams } from 'react-router-dom';
 import {
    WatchComments,
@@ -20,6 +20,7 @@ import {
 } from './watch.styled';
 import { WatchPlayer, WatchRight, WatchRightCards, WatchRightTitle, WatchTexts, WatchTitle } from './watch.styled';
 import SuggestCard from './partials/suggestCard';
+import CommentCard from './partials/commentCard';
 
 export default function Watch() {
    const [params] = useSearchParams();
@@ -35,7 +36,7 @@ export default function Watch() {
                   <WatchInfos>
                      <WatchInfosLeft>
                         <WatchInfosLeftIcon>
-                           <img src={user} alt='user' />
+                           <img src={creator} alt='user' />
                         </WatchInfosLeftIcon>
                         <WatchInfosLeftTexts>
                            <h3>
@@ -89,7 +90,11 @@ export default function Watch() {
                   </WatchDescs>
                   <WatchComments>
                      <WatchCommentsTitle>32 Comments</WatchCommentsTitle>
-                     <WatchCommentsCards></WatchCommentsCards>
+                     <WatchCommentsCards>
+                        <CommentCard />
+                        <CommentCard />
+                        <CommentCard />
+                     </WatchCommentsCards>
                   </WatchComments>
                </WatchTexts>
             </WatchLeft>
