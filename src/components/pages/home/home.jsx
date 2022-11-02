@@ -9,9 +9,6 @@ export default function Home() {
             <HomeTitle>Trending videos</HomeTitle>
             <HomeCards>
                <VideoCard />
-               <VideoCard />
-               <VideoCard />
-               <VideoCard />
             </HomeCards>
          </HomeContainer>
       </Layout>

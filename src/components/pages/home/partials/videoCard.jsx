@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import user from '../../../../assets/images/user.png';
 import {
    VideoCardAuthor,
@@ -11,8 +12,10 @@ import {
 } from './videoCard.styled';
 
 export default function VideoCard() {
+   const navigate = useNavigate();
+
    return (
-      <VideoCardContainer>
+      <VideoCardContainer onClick={() => navigate(`/watch?v=${1}`)}>
          <VideoCardImage>
             <img
                src='https://raw.githubusercontent.com/pmfoysal/data/main/vidplayer/images/day-2-recap-thumnail.jpg'

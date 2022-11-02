@@ -14,11 +14,25 @@ export const ButtonContainer = styled.button`
    border-radius: ${({ round }) => (round ? '20rem' : '0.8rem')};
    transition: 0.1s ease;
 
+   svg {
+      height: 1.8rem;
+      width: auto;
+   }
+
    ${({ main }) =>
       main
          ? css`
               border: 0.2rem solid #f08080;
               background-color: #f08080;
+              color: rgba(0, 0, 0, 0.95);
+           `
+         : null};
+
+   ${({ faded }) =>
+      faded
+         ? css`
+              border: 0.2rem solid transparent;
+              background-color: #f2f5fa;
               color: rgba(0, 0, 0, 0.95);
            `
          : null};
