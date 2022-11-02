@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Button from '@shared/button';
-import { Icon } from '@iconify/react';
 import user from '../../../../assets/images/user.png';
 import {
    CommentCardButtons,
@@ -11,6 +10,7 @@ import {
    CommentCardTexts,
    CommentCardTitle,
 } from './commentCard.styled';
+import CommentBox from './commentBox';
 
 export default function CommentCard({ children, reply }) {
    const [open, setOpen] = useState(false);
@@ -53,7 +53,12 @@ export default function CommentCard({ children, reply }) {
                </CommentCardButtons>
             </CommentCardTexts>
          </div>
-         {children && open ? <div className='nested'>{children}</div> : null}
+         {open && !reply ? (
+            <div className='nested'>
+               <CommentBox name='Reply' />
+               {children}
+            </div>
+         ) : null}
       </CommentCardContainer>
    );
 }

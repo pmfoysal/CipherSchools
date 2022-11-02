@@ -21,6 +21,7 @@ import {
 import { WatchPlayer, WatchRight, WatchRightCards, WatchRightTitle, WatchTexts, WatchTitle } from './watch.styled';
 import SuggestCard from './partials/suggestCard';
 import CommentCard from './partials/commentCard';
+import CommentBox from './partials/commentBox';
 
 export default function Watch() {
    const [params] = useSearchParams();
@@ -34,8 +35,6 @@ export default function Watch() {
                   <video
                      src='https://raw.githubusercontent.com/pmfoysal/data/main/vidplayer/videos/apple-day-2-recap.mp4'
                      poster='https://raw.githubusercontent.com/pmfoysal/data/main/vidplayer/images/day-2-recap-thumnail.jpg'
-                     autoPlay
-                     muted
                      controls
                      style={{
                         height: '100%',
@@ -103,6 +102,7 @@ export default function Watch() {
                   <WatchComments>
                      <WatchCommentsTitle>32 Comments</WatchCommentsTitle>
                      <WatchCommentsCards>
+                        <CommentBox name='Comment' />
                         <CommentCard>
                            <CommentCard reply />
                            <CommentCard reply />
