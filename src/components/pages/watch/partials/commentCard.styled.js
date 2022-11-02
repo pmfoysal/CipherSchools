@@ -4,8 +4,22 @@ export const CommentCardContainer = styled.summary`
    background-color: #f2f5fa;
    border-radius: 1.5rem;
    padding: 1.5rem;
-   display: flex;
-   gap: 1.5rem;
+
+   .main {
+      display: flex;
+      gap: 1.5rem;
+   }
+
+   .nested {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      padding: 2rem 0 0 5.5rem;
+
+      & > * {
+         padding: 0;
+      }
+   }
 `;
 
 export const CommentCardIcon = styled.figure`

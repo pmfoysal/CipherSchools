@@ -23,6 +23,13 @@ export const SuggestCardImage = styled.figure`
    height: auto;
    background-color: #ffffff;
    border-radius: 1rem;
+   overflow: hidden;
+
+   img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+   }
 `;
 
 export const SuggestCardTexts = styled.div``;

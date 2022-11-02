@@ -30,7 +30,19 @@ export default function Watch() {
       <Layout>
          <WatchContainer>
             <WatchLeft>
-               <WatchPlayer></WatchPlayer>
+               <WatchPlayer>
+                  <video
+                     src='https://raw.githubusercontent.com/pmfoysal/data/main/vidplayer/videos/apple-day-2-recap.mp4'
+                     poster='https://raw.githubusercontent.com/pmfoysal/data/main/vidplayer/images/day-2-recap-thumnail.jpg'
+                     autoPlay
+                     muted
+                     controls
+                     style={{
+                        height: '100%',
+                        width: '100%',
+                     }}
+                  ></video>
+               </WatchPlayer>
                <WatchTexts>
                   <WatchTitle>WWDC22: Day 2 Recap - Apple</WatchTitle>
                   <WatchInfos>
@@ -91,7 +103,10 @@ export default function Watch() {
                   <WatchComments>
                      <WatchCommentsTitle>32 Comments</WatchCommentsTitle>
                      <WatchCommentsCards>
-                        <CommentCard />
+                        <CommentCard>
+                           <CommentCard reply />
+                           <CommentCard reply />
+                        </CommentCard>
                         <CommentCard />
                         <CommentCard />
                      </WatchCommentsCards>

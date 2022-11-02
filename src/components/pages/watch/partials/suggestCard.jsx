@@ -13,7 +13,12 @@ export default function SuggestCard() {
 
    return (
       <SuggestCardContainer onClick={() => {}}>
-         <SuggestCardImage></SuggestCardImage>
+         <SuggestCardImage>
+            <img
+               src='https://raw.githubusercontent.com/pmfoysal/data/main/vidplayer/images/day-2-recap-thumnail.jpg'
+               alt='thumbnail'
+            />
+         </SuggestCardImage>
          <SuggestCardTexts>
             <SuggestCardTitle>WWDC22: Day 2 Recap - Apple</SuggestCardTitle>
             <SuggestCardAuthor title='@foysal'>Foysal Ahmmed</SuggestCardAuthor>

@@ -23,6 +23,7 @@ export const WatchPlayer = styled.main`
    background-color: #f2f5fa;
    border-radius: 1.5rem;
    border: 0.1rem solid rgba(0, 0, 0, 0.025);
+   overflow: hidden;
 `;
 
 export const WatchTexts = styled.article`
