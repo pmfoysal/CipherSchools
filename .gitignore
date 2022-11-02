@@ -12,6 +12,7 @@
 .map
 .map.js
 .map.css
+.env
 
 # misc
 .DS_Store
