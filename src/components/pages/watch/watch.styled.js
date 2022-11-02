@@ -153,11 +153,27 @@ export const WatchDescs = styled.p`
    font-size: 1.5rem;
    color: rgba(0, 0, 0, 0.85);
 
-   span {
+   .info {
       font-weight: 550;
       font-size: inherit;
       line-height: inherit;
       color: inherit;
+   }
+
+   .desc {
+      font-size: 1.5rem;
+      color: rgba(0, 0, 0, 0.85);
+      line-height: inherit;
+      font-weight: inherit;
+
+      .button {
+         margin-left: 0.5rem;
+         color: #f08080;
+         font-size: inherit;
+         font-weight: 550;
+         line-height: inherit;
+         cursor: pointer;
+      }
    }
 `;
 

@@ -22,10 +22,34 @@ import { WatchPlayer, WatchRight, WatchRightCards, WatchRightTitle, WatchTexts, 
 import SuggestCard from './partials/suggestCard';
 import CommentCard from './partials/commentCard';
 import CommentBox from './partials/commentBox';
+import { Fragment, useState } from 'react';
 
 export default function Watch() {
    const [params] = useSearchParams();
    const watchId = params.get('v');
+   const [descShow, setDescShow] = useState(false);
+
+   function renderDesc(text) {
+      if (text?.length <= 280) return text;
+      if (descShow) {
+         return (
+            <Fragment>
+               {text}
+               <span className='button' onClick={() => setDescShow(false)}>
+                  See Less
+               </span>
+            </Fragment>
+         );
+      }
+      return (
+         <Fragment>
+            {text?.slice(0, 280)}...
+            <span className='button' onClick={() => setDescShow(true)}>
+               See More
+            </span>
+         </Fragment>
+      );
+   }
 
    return (
       <Layout>
@@ -90,14 +114,15 @@ export default function Watch() {
                      </WatchInfosRight>
                   </WatchInfos>
                   <WatchDescs>
-                     <span>16K views &bull; 2 minutes ago</span>
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente reprehenderit dolores asperiores nesciunt
-                     non in libero veritatis praesentium nulla explicabo qui, impedit veniam nisi enim? Nostrum ipsam odio, quas
+                     <span className='info'>16K views &bull; 2 minutes ago</span>
+                     <span className='desc'>
+                        {renderDesc(`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente reprehenderit dolores asperiores nesciunt non in libero veritatis praesentium nulla explicabo qui, impedit veniam nisi enim? Nostrum ipsam odio, quas
                      voluptatem vitae accusamus nihil saepe doloribus velit tempore doloremque atque ducimus amet, optio eum,
                      debitis assumenda porro! Quos modi deleniti esse voluptas asperiores. Quas, iste impedit? Optio ut soluta
                      quisquam ea quod, iure hic recusandae quos cumque sint repellat modi dolore vel obcaecati rem a corporis
                      labore! Magni voluptates illum, quaerat cum dignissimos impedit qui repellendus! Autem pariatur sunt ratione
-                     nostrum, laborum voluptas et, quis, tenetur officia dolores labore iusto ex.
+                     nostrum, laborum voluptas et, quis, tenetur officia dolores labore iusto ex.`)}
+                     </span>
                   </WatchDescs>
                   <WatchComments>
                      <WatchCommentsTitle>32 Comments</WatchCommentsTitle>
