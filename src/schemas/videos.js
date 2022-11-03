@@ -19,12 +19,12 @@ const videosSchema = mongoose.Schema(
          maxLenght: [1000, 'Video description must be maximum 1000 characters long'],
       },
       thumbnail: {
-         type: URL,
+         type: String,
          required: [true, 'Please provide a video thumbnail link'],
          validate: [valid.isURL, 'Please provide a valid thumbnail url'],
       },
       video: {
-         type: URL,
+         type: String,
          required: [true, 'Please provide a video link'],
          validate: [valid.isURL, 'Please provide a valid video url'],
       },

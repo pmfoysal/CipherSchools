@@ -26,7 +26,7 @@ const notificationsSchema = mongoose.Schema(
             required: [true, 'Please provide a video description'],
          },
          thumbnail: {
-            type: URL,
+            type: String,
             required: [true, 'Please provide a video thumbnail link'],
             validate: [valid.isURL, 'Please provide a valid thumbnail url'],
          },
