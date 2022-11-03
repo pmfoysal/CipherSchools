@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema(
          type: String,
          trim: true,
          required: [true, 'Please provide a full name'],
-         minLength: [3, 'User name must be at least 3 characters long'],
+         minLength: [3, 'User name must be atleast 3 characters long'],
          maxLenght: [100, 'User name must be maximum 100 characters long'],
       },
       username: {
@@ -48,7 +48,7 @@ const userSchema = mongoose.Schema(
             values: ['creator', 'student'],
             message: '{VALUE} is not supported for user role',
          },
-         minLength: [3, 'User role must be at least 3 characters long'],
+         minLength: [3, 'User role must be atleast 3 characters long'],
          maxLenght: [100, 'User role must be maximum 100 characters long'],
       },
       image: {

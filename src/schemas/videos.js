@@ -8,14 +8,14 @@ const videosSchema = mongoose.Schema(
          type: String,
          trim: true,
          required: [true, 'Please provide a video title'],
-         minLength: [3, 'Video title must be at least 3 characters long'],
+         minLength: [3, 'Video title must be atleast 3 characters long'],
          maxLenght: [150, 'Video title must be maximum 150 characters long'],
       },
       description: {
          type: String,
          trim: true,
          required: [true, 'Please provide a video description'],
-         minLength: [5, 'Video description must be at least 5 characters long'],
+         minLength: [5, 'Video description must be atleast 5 characters long'],
          maxLenght: [1000, 'Video description must be maximum 1000 characters long'],
       },
       thumbnail: {

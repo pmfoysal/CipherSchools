@@ -10,13 +10,13 @@ exports.getComments = async (req, res) => {
 };
 
 exports.likeComment = async (req, res) => {
-   sendRes(res, () => comments.likeComment(req.params.vId, req.params.cId, req.body));
+   sendRes(res, () => comments.likeComment(req.params.cId, req.user._id));
 };
 
 exports.dislikeComment = async (req, res) => {
-   sendRes(res, () => comments.dislikeComment(req.params.vId, req.params.cId, req.body));
+   sendRes(res, () => comments.dislikeComment(req.params.cId, req.user._id));
 };
 
 exports.replyComment = async (req, res) => {
-   sendRes(res, () => comments.replyComment(req.params.vId, req.params.cId, req.body));
+   sendRes(res, () => comments.replyComment(req.params.cId, req.user._id));
 };
