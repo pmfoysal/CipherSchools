@@ -8,18 +8,14 @@ const commentsSchema = mongoose.Schema(
          ref: 'videos',
          required: [true, 'Please provide video informations'],
       },
-      comments: [
+      main: {
+         type: ObjectId,
+         ref: 'baseComments',
+      },
+      replies: [
          {
-            main: {
-               type: ObjectId,
-               ref: 'baseComments',
-            },
-            replies: [
-               {
-                  type: ObjectId,
-                  ref: 'baseComments',
-               },
-            ],
+            type: ObjectId,
+            ref: 'baseComments',
          },
       ],
    },

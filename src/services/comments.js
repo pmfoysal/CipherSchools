@@ -10,12 +10,20 @@ exports.postComments = async (vId, uId, data) => {
    });
    const revised = {
       video: await videos.findById(vId),
-      comments: {
-         main: comment,
-         replies: [],
-      },
+      main: comment,
+      replies: [],
    };
-   return (await comments.create(revised)).depopulate(['video', 'comments.main']);
+   return (await comments.create(revised)).depopulate(['video', 'main']).populate([
+      {
+         path: 'main',
+         model: 'baseComments',
+         populate: {
+            path: 'user',
+            model: 'users',
+            select: '-password -auth',
+         },
+      },
+   ]);
 };
 
 exports.getComments = async (vId, query) => {
@@ -28,28 +36,26 @@ exports.getComments = async (vId, query) => {
       .find({ ...query?.filter, video: vId })
       .sort(query?.sort)
       .select(temps.fields)
-      .populate({
-         path: 'comments',
-         populate: [
-            {
-               path: 'main',
-               model: 'baseComments',
-               populate: {
-                  path: 'user',
-                  model: 'users',
-                  select: '-password -auth',
-               },
+      .populate([
+         {
+            path: 'main',
+            model: 'baseComments',
+            populate: {
+               path: 'user',
+               model: 'users',
+               select: '-password -auth',
             },
-            {
-               path: 'replies',
-               model: 'baseComments',
-               populate: {
-                  path: 'user',
-                  model: 'users',
-               },
+         },
+         {
+            path: 'replies',
+            model: 'baseComments',
+            populate: {
+               path: 'user',
+               model: 'users',
+               select: '-password -auth',
             },
-         ],
-      });
+         },
+      ]);
    if (!result?.length) throw new Error('No comments found with these queries');
    return {
       totalItems: result?.length,
@@ -59,7 +65,7 @@ exports.getComments = async (vId, query) => {
 };
 
 exports.likeComment = async (cId, uId) => {
-   const user = await users.findById(uId).select('-password -auth -__v');
+   const user = await users.findById(uId);
    const comment = await baseComments.findById(cId);
    if (!comment) throw new Error('No comment is found with this id');
    let result = {};
@@ -87,6 +93,45 @@ exports.likeComment = async (cId, uId) => {
    return result;
 };
 
-exports.dislikeComment = async () => {};
+exports.dislikeComment = async (cId, uId) => {
+   const user = await users.findById(uId);
+   const comment = await baseComments.findById(cId);
+   if (!comment) throw new Error('No comment is found with this id');
+   let result = {};
+   await baseComments.updateOne(
+      { _id: cId },
+      {
+         $pull: { likes: uId },
+      }
+   );
+   if (comment.dislikes.includes(uId)) {
+      result = await baseComments.updateOne(
+         { _id: cId },
+         {
+            $pull: { dislikes: uId },
+         }
+      );
+   } else {
+      result = await baseComments.updateOne(
+         { _id: cId },
+         {
+            $push: { dislikes: user },
+         }
+      );
+   }
+   return result;
+};
 
-exports.replyComment = async () => {};
+exports.replyComment = async (cId, uId, data) => {
+   const replied = await baseComments.create({
+      user: await users.findById(uId),
+      content: data.content,
+   });
+   return await comments.updateOne(
+      { _id: cId },
+      {
+         replies: replied,
+      }
+   );
+   // return await comments.findOne({ 'comments._id': cId });
+};

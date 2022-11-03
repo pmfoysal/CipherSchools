@@ -18,5 +18,5 @@ exports.dislikeComment = async (req, res) => {
 };
 
 exports.replyComment = async (req, res) => {
-   sendRes(res, () => comments.replyComment(req.params.cId, req.user._id));
+   sendRes(res, () => comments.replyComment(req.params.cId, req.user._id, req.body));
 };
