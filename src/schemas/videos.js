@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const valid = require('validator').default;
+const { ObjectId } = mongoose.Schema.Types;
 
 const videosSchema = mongoose.Schema(
    {
@@ -27,29 +28,10 @@ const videosSchema = mongoose.Schema(
          required: [true, 'Please provide a video link'],
          validate: [valid.isURL, 'Please provide a valid video url'],
       },
-      author: {
-         _id: {
-            type: String,
-            required: [true, 'Please provide a author id'],
-         },
-         name: {
-            type: String,
-            required: [true, 'Please provide a author name'],
-         },
-         role: {
-            type: String,
-            required: [true, 'Please provide a author role'],
-         },
-         username: {
-            type: String,
-            lowercase: true,
-            required: [true, 'Please provide a author username'],
-         },
-         image: {
-            type: URL,
-            required: [true, 'Please provide a author image url'],
-            validate: [valid.isURL, 'Please provide a valid author image url'],
-         },
+      creator: {
+         type: ObjectId,
+         ref: 'users',
+         required: [true, 'Please provide creator informations'],
       },
    },
    {
