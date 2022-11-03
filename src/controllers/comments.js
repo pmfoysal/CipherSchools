@@ -2,7 +2,7 @@ const { sendRes } = require('@utilities');
 const comments = require('@services').comments;
 
 exports.postComments = async (req, res) => {
-   sendRes(res, () => comments.postComments(req.params.vId, req.body));
+   sendRes(res, () => comments.postComments(req.params.vId, req.user._id, req.body));
 };
 
 exports.getComments = async (req, res) => {

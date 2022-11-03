@@ -13,10 +13,12 @@ const videosInfoSchema = mongoose.Schema(
             user: {
                type: ObjectId,
                ref: 'users',
+               required: [true, 'Please provide user informations'],
             },
             content: {
                type: String,
                trim: true,
+               required: [true, 'Please provide comment content'],
                minLength: [1, 'Comment text must be at least 1 characters long'],
                maxLenght: [200, 'Comment text must be maximum 200 characters long'],
             },

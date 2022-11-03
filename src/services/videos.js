@@ -16,7 +16,7 @@ exports.postVideos = async (vId, data) => {
    }
    const creator = await users.findById(vId).select('-password -auth -__v');
    const revised = { ...data, creator };
-   return await videos.create(revised);
+   return (await videos.create(revised)).depopulate('creator');
 };
 
 exports.getVideos = async query => {

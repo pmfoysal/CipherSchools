@@ -15,9 +15,9 @@ DELETE /api/v1/notifications/:id -> [current]
 [Done] POST /api/v1/videos -> [creator]
 [Done] GET /api/v1/videos/:id -> [any]
 
-POST /api/v1/videos/:id/like -> [current]
-POST /api/v1/videos/:id/dislike -> [current]
-POST /api/v1/videos/:id/share -> [current]
+[Done] POST /api/v1/videos/:id/like -> [current]
+[Done] POST /api/v1/videos/:id/dislike -> [current]
+[Done] POST /api/v1/videos/:id/share -> [current]
 
 GET /api/v1/videos/:id/comments -> [current]
 POST /api/v1/videos/:id/comments -> [current]
