@@ -31,7 +31,12 @@ exports.getVideos = async query => {
    };
 };
 
-exports.getVideo = async () => {};
+exports.getVideo = async (id, query) => {
+   const fields = query?.fields?.replaceAll(/[, ]/g, ' ');
+   const result = await videos.findById(id).select(fields);
+   if (!result) throw new Error('No video is found with this id');
+   return result;
+};
 
 exports.likeVideo = async () => {};
 
