@@ -18,6 +18,19 @@ export const SigninContent = styled.div`
    display: flex;
    flex-direction: column;
    align-items: center;
+
+   .sign-link {
+      color: rgba(0, 0, 0, 0.85);
+      margin-top: 0.5rem;
+
+      span {
+         line-height: inherit;
+         color: #f08080;
+         font-size: inherit;
+         font-weight: 550;
+         cursor: pointer;
+      }
+   }
 `;
 
 export const SigninForm = styled.div`

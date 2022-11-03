@@ -2,11 +2,13 @@ import Logo from '@shared/logo';
 import { useState } from 'react';
 import Button from '@shared/button';
 import Inputbox from '@shared/inputbox';
+import { useNavigate } from 'react-router-dom';
 import { SignupOptions, SignupRole } from './signup.styled';
 import { SigninButtons, SigninContainer, SigninNote } from '../signin/signin.styled';
 import { SigninContent, SigninDesc, SigninForm, SigninTitle } from '../signin/signin.styled';
 
 export default function Signup() {
+   const navigate = useNavigate();
    const [email, setEmail] = useState('');
    const [name, setName] = useState('');
    const [pass, setPass] = useState('');
@@ -18,6 +20,9 @@ export default function Signup() {
             <Logo />
             <SigninTitle>Create an Account!</SigninTitle>
             <SigninDesc>Provide your information to register</SigninDesc>
+            <p className='sign-link'>
+               Already have an account? <span onClick={() => navigate('/signin')}>Signin</span>
+            </p>
             <SigninForm>
                <Inputbox type='text' label='Full Name' value={name} setter={setName} />
                <Inputbox type='email' label='Email Address' value={email} setter={setEmail} />

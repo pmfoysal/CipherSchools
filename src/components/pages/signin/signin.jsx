@@ -5,12 +5,13 @@ import { toast } from 'react-toastify';
 import Inputbox from '@shared/inputbox';
 import { StoreContext } from '@contexts/storeProvider';
 import { useContext, useEffect, useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { SigninContent, SigninDesc, SigninForm, SigninTitle } from './signin.styled';
 import { SigninButtons, SigninCheck, SigninContainer, SigninNote } from './signin.styled';
 
 export default function Signin() {
    const location = useLocation();
+   const navigate = useNavigate();
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
    const [disable, setDisable] = useState(true);
@@ -52,6 +53,9 @@ export default function Signin() {
             <Logo />
             <SigninTitle>Welcome Back!</SigninTitle>
             <SigninDesc>Provide your email ID and password to continue</SigninDesc>
+            <p className='sign-link'>
+               Don't have an account? <span onClick={() => navigate('/signup')}>Signup</span>
+            </p>
             <SigninForm>
                <Inputbox type='email' label='Email ID' value={email} setter={setEmail} />
                <Inputbox type='password' label='Password' value={password} setter={setPassword} />
