@@ -1,16 +1,18 @@
 import Logo from '@shared/logo';
 import api from '@middlewares/api';
 import Button from '@shared/button';
+import { toast } from 'react-toastify';
 import Inputbox from '@shared/inputbox';
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { StoreContext } from '@contexts/storeProvider';
+import { useContext, useEffect, useState } from 'react';
 import { SigninContent, SigninDesc, SigninForm, SigninTitle } from './signin.styled';
 import { SigninButtons, SigninCheck, SigninContainer, SigninNote } from './signin.styled';
-import { toast } from 'react-toastify';
 
 export default function Signin() {
    const navigate = useNavigate();
    const [email, setEmail] = useState('');
+   const { user, setUser } = useContext(StoreContext);
    const [password, setPassword] = useState('');
    const [disable, setDisable] = useState(true);
    const [loading, setLoading] = useState(false);
@@ -22,10 +24,13 @@ export default function Signin() {
          if (data?.data?.token) {
             toast.success('Successfully signed in');
             window.localStorage.setItem('userToken', data.token);
+            setUser(data?.data?.user);
             navigate('/', { replace: true });
          }
       } catch (res) {
          setLoading(false);
+         setUser({});
+         window.localStorage.removeItem('userToken');
          console.log('Failed to POST /auth/signin');
          console.log(res.error || res.message);
          toast.error(res.error || res.message);
