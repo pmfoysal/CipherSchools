@@ -104,4 +104,13 @@ exports.dislikeVideo = async (vId, uId) => {
    return result;
 };
 
-exports.shareVideo = async vId => {};
+exports.shareVideo = async vId => {
+   const result = await videos.updateOne(
+      { _id: vId },
+      {
+         $inc: { shares: 1 },
+      }
+   );
+   if (!result.modifiedCount) throw new Error('No video is found with this id');
+   return result;
+};
