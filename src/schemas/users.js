@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema(
          trim: true,
          unique: true,
          lowercase: true,
+         required: [true, 'Please provide a username'],
       },
       email: {
          type: String,
@@ -79,7 +80,6 @@ userSchema.pre('save', function (next) {
    const pass = this.password;
    const hashed = bcrypt.hashSync(pass);
    this.password = hashed;
-   this.username = this.email.split('@')[0].toLowerCase();
    next();
 });
 

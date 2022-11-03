@@ -2,7 +2,7 @@ const { sendRes } = require('@utilities');
 const videos = require('@services').videos;
 
 exports.postVideos = async (req, res) => {
-   sendRes(res, () => videos.postVideos(req.body));
+   sendRes(res, () => videos.postVideos(req.user._id, req.body));
 };
 
 exports.getVideos = async (req, res) => {
