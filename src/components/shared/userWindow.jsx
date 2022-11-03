@@ -1,6 +1,10 @@
+import api from '@middlewares/api';
 import { Icon } from '@iconify/react';
-import { useEffect, useState } from 'react';
-import user from '../../assets/images/user.png';
+import studentImg from '../../assets/images/user.png';
+import { StoreContext } from '@contexts/storeProvider';
+import { useContext, useEffect, useState } from 'react';
+import creatorImg from '../../assets/images/creator.png';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
    UserWindowContainer,
    UserWindowImage,
@@ -11,14 +15,25 @@ import {
    UserWindowPopup,
    UserWindowRole,
 } from './userWindow.styled';
-import { useLocation } from 'react-router-dom';
 
 export default function UserWindow() {
    const location = useLocation();
+   const navigate = useNavigate();
    const [open, setOpen] = useState(false);
+   const { user, setUser } = useContext(StoreContext);
+   const student = user?.role === 'student';
 
    function openHandler() {
       setOpen(prev => !prev);
+   }
+
+   async function signoutHandler() {
+      await api.post('/auth/signout');
+      setUser({});
+      window.localStorage.removeItem('userToken');
+      window.localStorage.removeItem('user');
+      setOpen(false);
+      navigate('/signin');
    }
 
    useEffect(() => {
@@ -27,18 +42,18 @@ export default function UserWindow() {
 
    return (
       <UserWindowContainer>
-         <UserWindowImage src={user} alt='user' onClick={openHandler} />
+         <UserWindowImage src={student ? studentImg : creatorImg} alt='user' onClick={openHandler} />
          {open && (
             <UserWindowPopup>
-               <UserWindowImg src={user} alt='user' />
-               <UserWindowName>Foysal Ahmmed</UserWindowName>
-               <UserWindowRole>Creator</UserWindowRole>
+               <UserWindowImg src={student ? studentImg : creatorImg} alt='user' />
+               <UserWindowName>{user?.name || 'Unknown'}</UserWindowName>
+               <UserWindowRole>{user?.role || 'invalid'}</UserWindowRole>
                <UserWindowLinks>
-                  <UserWindowLink onClick={() => {}}>
+                  <UserWindowLink onClick={() => navigate('/notifications')}>
                      <Icon icon='bytesize:bell' />
                      Notifications
                   </UserWindowLink>
-                  <UserWindowLink danger onClick={() => {}}>
+                  <UserWindowLink danger onClick={signoutHandler}>
                      <Icon icon='mi:log-out' />
                      Signout
                   </UserWindowLink>

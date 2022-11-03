@@ -23,7 +23,7 @@ export default function Signin() {
          const { data } = await api.post('/auth/signin', { email, password });
          if (data?.data?.token) {
             toast.success('Successfully signed in');
-            window.localStorage.setItem('userToken', data.token);
+            window.localStorage.setItem('userToken', data?.data?.token);
             setUser(data?.data?.user);
          }
       } catch (res) {
