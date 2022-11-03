@@ -1,18 +1,19 @@
 import React from 'react';
-import {ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 export default function Toaster() {
    return (
       <ToastContainer
-         position='top-center'
+         position='bottom-right'
          autoClose={3000}
-         hideProgressBar={false}
-         newestOnTop
+         hideProgressBar
+         newestOnTop={false}
          closeOnClick
          rtl={false}
          pauseOnFocusLoss={false}
          draggable
          pauseOnHover={false}
+         theme='light'
       />
    );
 }

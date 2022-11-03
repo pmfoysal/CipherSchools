@@ -1,3 +1,4 @@
+import Toaster from './toaster';
 import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import StoreProvider from '@contexts/storeProvider';
@@ -23,7 +24,10 @@ export default function AppWrapper({ children }) {
          <ThemeProvider>
             <QueryClientProvider client={queryClient}>
                <StoreProvider>
-                  <BrowserRouter>{children}</BrowserRouter>
+                  <BrowserRouter>
+                     {children}
+                     <Toaster />
+                  </BrowserRouter>
                </StoreProvider>
             </QueryClientProvider>
          </ThemeProvider>

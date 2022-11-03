@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SigninContent, SigninDesc, SigninForm, SigninTitle } from './signin.styled';
 import { SigninButtons, SigninCheck, SigninContainer, SigninNote } from './signin.styled';
+import { toast } from 'react-toastify';
 
 export default function Signin() {
    const navigate = useNavigate();
@@ -18,8 +19,8 @@ export default function Signin() {
       try {
          setLoading(true);
          const { data } = await api.post('/auth/signin', { email, password });
-         console.log(data);
-         if (data.token) {
+         if (data?.data?.token) {
+            toast.success('Successfully signed in');
             window.localStorage.setItem('userToken', data.token);
             navigate('/', { replace: true });
          }
@@ -27,6 +28,7 @@ export default function Signin() {
          setLoading(false);
          console.log('Failed to POST /auth/signin');
          console.log(res.error || res.message);
+         toast.error(res.error || res.message);
       }
    }
 

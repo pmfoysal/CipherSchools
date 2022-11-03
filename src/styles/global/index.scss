@@ -1,0 +1,17 @@
+.Toastify {
+   .Toastify__toast {
+      border-radius: 1rem;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, 0.025);
+      background-color: #ffffff;
+      display: flex;
+      gap: 0.5rem;
+   }
+
+   * {
+      line-height: 1.5;
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: rgba(0, 0, 0, 0.9);
+      font-family: inherit;
+   }
+}
