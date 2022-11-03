@@ -39,7 +39,7 @@
    },
    "scripts": {
       "start": "node index.js",
-      "build": "nodemon index.js"
+      "dev": "nodemon index.js"
    },
    "dependencies": {
       "bcryptjs": "^2.4.3",
