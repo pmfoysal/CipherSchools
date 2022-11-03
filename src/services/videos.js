@@ -16,7 +16,20 @@ exports.postVideos = async (id, data) => {
    return await videos.create(revised);
 };
 
-exports.getVideos = async () => {};
+exports.getVideos = async query => {
+   const temps = {
+      page: Number(query?.page) - 1,
+      limit: Number(query?.limit),
+      fields: query?.fields?.replaceAll(/[, ]/g, ' '),
+   };
+   const result = await videos.find(query?.filter).sort(query?.sort).select(temps.fields);
+   if (!result?.length) throw new Error('No videos found with these queries');
+   return {
+      totalItems: result?.length,
+      totalPages: Math.ceil(result?.length / (temps?.limit || result?.length)),
+      data: result,
+   };
+};
 
 exports.getVideo = async () => {};
 
