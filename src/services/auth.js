@@ -23,7 +23,8 @@ exports.signin = async data => {
    const token = jwt.sign(temp, process.env.JWT_SECRET, { expiresIn: '1d' });
 
    await users.updateOne({ _id: user?._id }, { auth: { loggedIn: true, token, updatedAt: new Date().toISOString() } });
-   return { token };
+   const newUser = { _id: user._id, name: user.name, email: user.email, username: user.username, role: user.role };
+   return { token, user: newUser };
 };
 
 exports.signout = async id => {
