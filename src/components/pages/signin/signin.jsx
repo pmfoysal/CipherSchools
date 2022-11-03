@@ -3,19 +3,19 @@ import api from '@middlewares/api';
 import Button from '@shared/button';
 import { toast } from 'react-toastify';
 import Inputbox from '@shared/inputbox';
-import { useNavigate } from 'react-router-dom';
 import { StoreContext } from '@contexts/storeProvider';
 import { useContext, useEffect, useState } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 import { SigninContent, SigninDesc, SigninForm, SigninTitle } from './signin.styled';
 import { SigninButtons, SigninCheck, SigninContainer, SigninNote } from './signin.styled';
 
 export default function Signin() {
-   const navigate = useNavigate();
+   const location = useLocation();
    const [email, setEmail] = useState('');
-   const { user, setUser } = useContext(StoreContext);
    const [password, setPassword] = useState('');
    const [disable, setDisable] = useState(true);
    const [loading, setLoading] = useState(false);
+   const { user, setUser } = useContext(StoreContext);
 
    async function submitHandler() {
       try {
@@ -25,7 +25,6 @@ export default function Signin() {
             toast.success('Successfully signed in');
             window.localStorage.setItem('userToken', data.token);
             setUser(data?.data?.user);
-            navigate('/', { replace: true });
          }
       } catch (res) {
          setLoading(false);
@@ -41,6 +40,11 @@ export default function Signin() {
       if (!email || !password) setDisable(true);
       else setDisable(false);
    }, [email, password]);
+
+   if (user?._id) {
+      const from = location?.state?.from?.pathname || '/';
+      return <Navigate to={from} replace />;
+   }
 
    return (
       <SigninContainer>
