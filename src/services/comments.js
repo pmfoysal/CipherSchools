@@ -14,7 +14,24 @@ exports.postComments = async (vId, uId, data) => {
    return (await comments.create(revised)).depopulate(['video', 'comments.user']);
 };
 
-exports.getComments = async () => {};
+exports.getComments = async (vId, query) => {
+   const temps = {
+      page: Number(query?.page) - 1,
+      limit: Number(query?.limit),
+      fields: query?.fields?.replaceAll(/[, ]/g, ' '),
+   };
+   const result = await comments
+      .find({ ...query?.filter, video: vId })
+      .sort(query?.sort)
+      .select(temps.fields)
+      .populate('comments.user', '-password -auth -__v');
+   if (!result?.length) throw new Error('No comments found with these queries');
+   return {
+      totalItems: result?.length,
+      totalPages: Math.ceil(result?.length / (temps?.limit || result?.length)),
+      data: result,
+   };
+};
 
 exports.likeComment = async () => {};
 
