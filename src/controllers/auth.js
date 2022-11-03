@@ -10,5 +10,5 @@ exports.signin = async (req, res) => {
 };
 
 exports.signout = async (req, res) => {
-   sendRes(res, () => auth.signout());
+   sendRes(res, () => auth.signout(req.user._id));
 };
