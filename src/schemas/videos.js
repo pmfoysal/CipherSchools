@@ -33,6 +33,18 @@ const videosSchema = mongoose.Schema(
          ref: 'users',
          required: [true, 'Please provide creator informations'],
       },
+      likes: [
+         {
+            type: ObjectId,
+            ref: 'users',
+         },
+      ],
+      dislikes: [
+         {
+            type: ObjectId,
+            ref: 'users',
+         },
+      ],
    },
    {
       timestamps: true,

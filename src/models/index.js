@@ -1,6 +1,6 @@
 module.exports = {
    users: require('./users'),
    videos: require('./videos'),
-   comments: require('./comments'),
+   videosInfo: require('./videosInfo'),
    notifications: require('./notifications'),
 };
