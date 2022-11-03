@@ -1,0 +1,14 @@
+[
+   {
+      "name": "Anurag Mishra",
+      "email": "anurag@gmail.com",
+      "password": "ABcd12@#",
+      "role": "creator"
+   },
+   {
+      "name": "Foysal Ahmmed",
+      "email": "foysal@gmail.com",
+      "password": "ABcd12@#",
+      "role": "student"
+   }
+]

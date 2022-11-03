@@ -45,6 +45,10 @@ const videosSchema = mongoose.Schema(
             ref: 'users',
          },
       ],
+      views: {
+         type: Number,
+         default: 0,
+      },
    },
    {
       timestamps: true,
