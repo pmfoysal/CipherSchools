@@ -6,10 +6,10 @@
 [Done] POST /api/v1/auth/signin -> [any]
 [Done] POST /api/v1/auth/signout -> [any]
 ======================================================
-GET /api/v1/notifications -> [current]
-POST /api/v1/notifications -> [current]
-PATCH /api/v1/notifications/:id -> [current]
-DELETE /api/v1/notifications/:id -> [current]
+[Done] GET /api/v1/notifications -> [current]
+[Done] POST /api/v1/notifications -> [current]
+[Done] PATCH /api/v1/notifications/:id -> [current]
+[Done] DELETE /api/v1/notifications/:id -> [current]
 ======================================================
 [Done] GET /api/v1/videos -> [any]
 [Done] POST /api/v1/videos -> [creator]
