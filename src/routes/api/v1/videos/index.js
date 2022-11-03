@@ -1,7 +1,7 @@
 const comments = require('./comments');
 const request = require('@middlewares');
-const videos = require('express').Router();
 const controller = require('@controllers').videos;
+const videos = require('express').Router({ mergeParams: true });
 
 videos
    .route('/')

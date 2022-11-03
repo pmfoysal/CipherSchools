@@ -1,6 +1,6 @@
 const request = require('@middlewares');
-const notifications = require('express').Router();
 const controller = require('@controllers').notifications;
+const notifications = require('express').Router({ mergeParams: true });
 
 notifications
    .route('/')
