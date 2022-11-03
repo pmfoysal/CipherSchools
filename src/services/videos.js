@@ -25,7 +25,11 @@ exports.getVideos = async query => {
       limit: Number(query?.limit),
       fields: query?.fields?.replaceAll(/[, ]/g, ' '),
    };
-   const result = await videos.find(query?.filter).sort(query?.sort).select(temps.fields);
+   const result = await videos
+      .find(query?.filter)
+      .sort(query?.sort)
+      .select(temps.fields)
+      .populate('creator', '-password -auth -__v');
    if (!result?.length) throw new Error('No videos found with these queries');
    return {
       totalItems: result?.length,
@@ -36,7 +40,7 @@ exports.getVideos = async query => {
 
 exports.getVideo = async (vId, query) => {
    const fields = query?.fields?.replaceAll(/[, ]/g, ' ');
-   const result = await videos.findById(vId).select(fields);
+   const result = await videos.findById(vId).select(fields).populate('creator', '-password -auth -__v');
    if (!result) throw new Error('No video is found with this id');
    await videos.updateOne({ _id: result._id }, { $inc: { views: 1 } });
    return result;
