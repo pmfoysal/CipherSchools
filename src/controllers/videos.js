@@ -14,13 +14,13 @@ exports.getVideo = async (req, res) => {
 };
 
 exports.likeVideo = async (req, res) => {
-   sendRes(res, () => videos.likeVideo(req.params.vId, req.body));
+   sendRes(res, () => videos.likeVideo(req.params.vId, req.user._id));
 };
 
 exports.dislikeVideo = async (req, res) => {
-   sendRes(res, () => videos.dislikeVideo(req.params.vId, req.body));
+   sendRes(res, () => videos.dislikeVideo(req.params.vId, req.user._id));
 };
 
 exports.shareVideo = async (req, res) => {
-   sendRes(res, () => videos.shareVideo(req.params.vId, req.body));
+   sendRes(res, () => videos.shareVideo(req.params.vId, req.user._id));
 };
