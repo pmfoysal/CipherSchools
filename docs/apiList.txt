@@ -12,15 +12,15 @@ PATCH /api/v1/notifications/:id -> [current]
 DELETE /api/v1/notifications/:id -> [current]
 ======================================================
 GET /api/v1/videos -> [any]
-GET /api/v1/videos/:id -> [any]
 POST /api/v1/videos -> [creator]
+GET /api/v1/videos/:id -> [any]
 
 POST /api/v1/videos/:id/like -> [current]
 POST /api/v1/videos/:id/dislike -> [current]
 POST /api/v1/videos/:id/share -> [current]
 
-POST /api/v1/videos/:id/comments -> [current]
 GET /api/v1/videos/:id/comments -> [current]
+POST /api/v1/videos/:id/comments -> [current]
 POST /api/v1/videos/:id/comments/:id/like -> [current]
 POST /api/v1/videos/:id/comments/:id/dislike -> [current]
 POST /api/v1/videos/:id/comments/:id/reply -> [current]
