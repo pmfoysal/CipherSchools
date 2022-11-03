@@ -2,18 +2,21 @@ const users = require('@models').users;
 const videos = require('@models').videos;
 const comments = require('@models').comments;
 const baseComments = require('@models').baseComments;
+const notifications = require('@models').notifications;
 
 exports.postComments = async (vId, uId, data) => {
+   const user = await users.findById(uId);
+   const video = await videos.findById(vId);
    const comment = await baseComments.create({
-      user: await users.findById(uId),
+      user,
       content: data.content,
    });
    const revised = {
-      video: await videos.findById(vId),
+      video,
       main: comment,
       replies: [],
    };
-   return (await comments.create(revised)).depopulate(['video', 'main']).populate([
+   const result = (await comments.create(revised)).depopulate(['video', 'main']).populate([
       {
          path: 'main',
          model: 'baseComments',
@@ -24,6 +27,12 @@ exports.postComments = async (vId, uId, data) => {
          },
       },
    ]);
+   await notifications.create({
+      title: `${user.name} commented on your video: ${video.title}`,
+      video,
+      receiver: video.creator,
+   });
+   return result;
 };
 
 exports.getComments = async (vId, query) => {
@@ -64,8 +73,9 @@ exports.getComments = async (vId, query) => {
    };
 };
 
-exports.likeComment = async (cId, uId) => {
+exports.likeComment = async (vId, cId, uId) => {
    const user = await users.findById(uId);
+   const video = await videos.findById(vId);
    const comment = await baseComments.findById(cId);
    if (!comment) throw new Error('No comment is found with this id');
    let result = {};
@@ -89,12 +99,18 @@ exports.likeComment = async (cId, uId) => {
             $push: { likes: user },
          }
       );
+      await notifications.create({
+         title: `${user.name} likes your comment: ${comment.content}`,
+         video,
+         receiver: comment.user,
+      });
    }
    return result;
 };
 
-exports.dislikeComment = async (cId, uId) => {
+exports.dislikeComment = async (vId, cId, uId) => {
    const user = await users.findById(uId);
+   const video = await videos.findById(vId);
    const comment = await baseComments.findById(cId);
    if (!comment) throw new Error('No comment is found with this id');
    let result = {};
@@ -118,20 +134,33 @@ exports.dislikeComment = async (cId, uId) => {
             $push: { dislikes: user },
          }
       );
+      await notifications.create({
+         title: `${user.name} dislikes your comment: ${comment.content}`,
+         video,
+         receiver: comment.user,
+      });
    }
    return result;
 };
 
-exports.replyComment = async (cId, uId, data) => {
+exports.replyComment = async (vId, cId, uId, data) => {
+   const user = await users.findById(uId);
+   const video = await videos.findById(vId);
+   const comment = await baseComments.findById(cId);
    const replied = await baseComments.create({
-      user: await users.findById(uId),
+      user,
       content: data.content,
    });
-   return await comments.updateOne(
+   const result = await comments.updateOne(
       { _id: cId },
       {
          replies: replied,
       }
    );
-   // return await comments.findOne({ 'comments._id': cId });
+   await notifications.create({
+      title: `${user.name} replied to your comment: ${comment.content}`,
+      video,
+      receiver: comment.user,
+   });
+   return result;
 };

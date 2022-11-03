@@ -22,5 +22,5 @@ exports.dislikeVideo = async (req, res) => {
 };
 
 exports.shareVideo = async (req, res) => {
-   sendRes(res, () => videos.shareVideo(req.params.vId));
+   sendRes(res, () => videos.shareVideo(req.params.vId, req.user._id));
 };

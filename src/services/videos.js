@@ -1,5 +1,6 @@
 const users = require('@models').users;
 const videos = require('@models').videos;
+const notifications = require('@models').notifications;
 
 exports.postVideos = async (vId, data) => {
    if (data.hasOwnProperty('creator')) {
@@ -71,6 +72,11 @@ exports.likeVideo = async (vId, uId) => {
             $push: { likes: user },
          }
       );
+      await notifications.create({
+         title: `${user.name} likes your video: ${video.title}`,
+         video,
+         receiver: video.creator,
+      });
    }
    return result;
 };
@@ -100,11 +106,18 @@ exports.dislikeVideo = async (vId, uId) => {
             $push: { dislikes: user },
          }
       );
+      await notifications.create({
+         title: `${user.name} dislikes your video: ${video.title}`,
+         video,
+         receiver: video.creator,
+      });
    }
    return result;
 };
 
-exports.shareVideo = async vId => {
+exports.shareVideo = async (vId, uId) => {
+   const video = await videos.findById(vId);
+   const user = await users.findById(uId);
    const result = await videos.updateOne(
       { _id: vId },
       {
@@ -112,5 +125,10 @@ exports.shareVideo = async vId => {
       }
    );
    if (!result.modifiedCount) throw new Error('No video is found with this id');
+   await notifications.create({
+      title: `${user.name} shares your video: ${video.title}`,
+      video,
+      receiver: video.creator,
+   });
    return result;
 };

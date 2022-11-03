@@ -1,9 +1,9 @@
 const { sendRes } = require('@utilities');
 const notifications = require('@services').notifications;
 
-exports.postNotifications = async (req, res) => {
-   sendRes(res, () => notifications.postNotifications(req.body));
-};
+// exports.postNotifications = async (req, res) => {
+//    sendRes(res, () => notifications.postNotifications(req.body));
+// };
 
 exports.getNotifications = async (req, res) => {
    sendRes(res, () => notifications.getNotifications(req.params));
