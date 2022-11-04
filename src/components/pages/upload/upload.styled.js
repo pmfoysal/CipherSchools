@@ -5,6 +5,18 @@ export const UploadContainer = styled.section`
    border-radius: 2rem;
    background-color: #ffffff;
    margin: 2rem 0 3rem;
+
+   @media screen and (max-width: 550px) {
+      padding: 2rem;
+   }
+
+   @media screen and (max-width: 500px) {
+      padding: 1.5rem;
+   }
+
+   @media screen and (max-width: 450px) {
+      padding: 1rem;
+   }
 `;
 
 export const UploadTitle = styled.h1`
@@ -41,5 +53,17 @@ export const UploadForm = styled.div`
       justify-content: flex-end;
       gap: 2rem;
       margin-top: 1.5rem;
+   }
+
+   @media screen and (max-width: 550px) {
+      padding: 2rem;
+   }
+
+   @media screen and (max-width: 500px) {
+      padding: 1.5rem;
+   }
+
+   @media screen and (max-width: 450px) {
+      padding: 1rem;
    }
 `;
