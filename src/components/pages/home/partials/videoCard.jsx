@@ -1,5 +1,6 @@
+import getTime from '@utilities/getTime';
 import { useNavigate } from 'react-router-dom';
-import user from '../../../../assets/images/user.png';
+import creator from '../../../../assets/images/creator.png';
 import {
    VideoCardAuthor,
    VideoCardContainer,
@@ -11,27 +12,26 @@ import {
    VideoCardTitle,
 } from './videoCard.styled';
 
-export default function VideoCard() {
+export default function VideoCard({ data = {} }) {
    const navigate = useNavigate();
 
    return (
-      <VideoCardContainer onClick={() => navigate(`/watch?v=${1}`)}>
+      <VideoCardContainer onClick={() => navigate(`/watch?v=${data._id}`)}>
          <VideoCardImage>
-            <img
-               src='https://raw.githubusercontent.com/pmfoysal/data/main/vidplayer/images/day-2-recap-thumnail.jpg'
-               alt='thumbnail'
-            />
+            <img src={data.thumbnail} alt='thumbnail' />
          </VideoCardImage>
          <VideoCardDetails>
             <VideoCardIcon>
-               <img src={user} alt='user' />
+               <img src={creator} alt='creator' />
             </VideoCardIcon>
             <VideoCardTexts>
-               <VideoCardTitle>WWDC22: Day 2 Recap - Apple</VideoCardTitle>
+               <VideoCardTitle>{data.title}</VideoCardTitle>
                <VideoCardAuthor>
-                  Foysal Ahmmed <span>@foysal</span>
+                  {data.creator.name} <span>@{data.creator.username}</span>
                </VideoCardAuthor>
-               <VideoCardInfo>2 minutes ago &bull; 30K views</VideoCardInfo>
+               <VideoCardInfo>
+                  {getTime(data.createdAt)} &bull; {data.views} views
+               </VideoCardInfo>
             </VideoCardTexts>
          </VideoCardDetails>
       </VideoCardContainer>
