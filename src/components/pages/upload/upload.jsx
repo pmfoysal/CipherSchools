@@ -42,7 +42,7 @@ export default function Upload() {
       } catch (res) {
          setDisable(true);
          setLoading(false);
-         toast.error('Please provide valid informations!');
+         toast.error(res?.error || res?.message);
       }
    }
 

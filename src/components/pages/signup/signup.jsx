@@ -1,7 +1,9 @@
 import Logo from '@shared/logo';
-import { useState } from 'react';
+import api from '@middlewares/api';
 import Button from '@shared/button';
+import { toast } from 'react-toastify';
 import Inputbox from '@shared/inputbox';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SignupOptions, SignupRole } from './signup.styled';
 import { SigninButtons, SigninContainer, SigninNote } from '../signin/signin.styled';
@@ -12,7 +14,41 @@ export default function Signup() {
    const [email, setEmail] = useState('');
    const [name, setName] = useState('');
    const [pass, setPass] = useState('');
+   const [role, setRole] = useState('creator');
    const [loading, setLoading] = useState(false);
+   const [disable, setDisable] = useState(true);
+
+   function roleHandler(e) {
+      setRole(e.target.value);
+   }
+
+   async function submitHandler() {
+      if (!email || !name || !pass) return;
+      const payload = {
+         name,
+         email,
+         password: pass,
+         role,
+      };
+      try {
+         setDisable(true);
+         setLoading(true);
+         await api.post('/auth/signup', payload);
+         toast.success('Successfully registered the account!');
+         setDisable(false);
+         setLoading(false);
+         navigate('/signin');
+      } catch (res) {
+         setDisable(false);
+         setLoading(false);
+         toast.error(res?.error || res?.message);
+      }
+   }
+
+   useEffect(() => {
+      if (!email || !name || !pass) setDisable(true);
+      else setDisable(false);
+   }, [email, name, pass]);
 
    return (
       <SigninContainer>
@@ -29,21 +65,14 @@ export default function Signup() {
                <Inputbox type='password' label='Create Password' value={pass} setter={setPass} />
                <SignupRole>
                   <span>Select Role</span>
-                  <SignupOptions>
+                  <SignupOptions onChange={roleHandler} value={role}>
                      <option value='creator'>Creator</option>
                      <option value='student'>Student</option>
                   </SignupOptions>
                </SignupRole>
             </SigninForm>
             <SigninButtons>
-               <Button
-                  main
-                  name='Signup'
-                  handler={() => {
-                     setLoading(true);
-                  }}
-                  loading={loading}
-               />
+               <Button main name='Signup' handler={submitHandler} loading={loading} disable={disable} />
             </SigninButtons>
             <SigninNote>
                <strong>Note:</strong> By signing up, you'll agree our <span>Terms & Conditions</span>. Please read our{' '}
