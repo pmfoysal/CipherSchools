@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-export default function useGetVideos(options = {}) {
+export default function useGetVideo(id, options = {}) {
    return useQuery({
-      queryKey: [`/videos?sort[createdAt]=desc`],
+      queryKey: [`/videos/${id}`],
       cacheTime: 0,
       retry: 3,
       refetchOnWindowFocus: false,

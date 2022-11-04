@@ -12,7 +12,7 @@ export default function App() {
                <Route path='/' element={<RequireAuth then={<Home />} />} />
                <Route path='/signin' element={<Signin />} />
                <Route path='/signup' element={<Signup />} />
-               <Route path='/watch' element={<RequireAuth then={<Watch />} />} />
+               <Route path='/watch/:vId' element={<RequireAuth then={<Watch />} />} />
                <Route path='*' element={<h1>Page Not Found!</h1>} />
             </Routes>
          </Suspense>
