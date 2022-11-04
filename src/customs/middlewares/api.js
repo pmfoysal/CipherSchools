@@ -21,6 +21,10 @@ api.interceptors.response.use(
       return response;
    },
    function (error) {
+      const status = error?.response?.status;
+      if (status === 401 || status === 403) {
+         window.location.pathname = '/signin';
+      }
       return Promise.reject(error.response.data || error);
    }
 );
