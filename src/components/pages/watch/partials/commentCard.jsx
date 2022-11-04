@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import Button from '@shared/button';
-import user from '../../../../assets/images/user.png';
+import { useContext, useState } from 'react';
+import userImg from '../../../../assets/images/user.png';
+import creatorImg from '../../../../assets/images/creator.png';
 import {
    CommentCardButtons,
    CommentCardContainer,
@@ -10,34 +11,74 @@ import {
    CommentCardTexts,
    CommentCardTitle,
 } from './commentCard.styled';
+import api from '@middlewares/api';
 import CommentBox from './commentBox';
+import getTime from '@utilities/getTime';
+import { StoreContext } from '@contexts/storeProvider';
 
-export default function CommentCard({ children, reply }) {
+export default function CommentCard({ children, reply, data = {}, refetch, vId }) {
    const [open, setOpen] = useState(false);
+   const { user } = useContext(StoreContext);
+   const [newComment, setNewComment] = useState('');
 
    function openHandler() {
       setOpen(prev => !prev);
+   }
+
+   function infoBtnHandler(name) {
+      return async function () {
+         await api.post(`/videos/${vId}/comments/${data?._id}/${name}`);
+         if (refetch) refetch();
+      };
+   }
+
+   function getLikeIcon(likes) {
+      if (likes?.includes(user?._id)) {
+         return 'fluent:thumb-like-24-filled';
+      }
+      return 'fluent:thumb-like-24-regular';
+   }
+
+   function getDislikeIcon(dislikes) {
+      if (dislikes?.includes(user?._id)) {
+         return 'fluent:thumb-dislike-24-filled';
+      }
+      return 'fluent:thumb-dislike-24-regular';
    }
 
    return (
       <CommentCardContainer>
          <div className='main'>
             <CommentCardIcon>
-               <img src={user} alt='user' />
+               <img src={data?.user?.role === 'student' ? userImg : creatorImg} alt='user' />
             </CommentCardIcon>
             <CommentCardTexts>
                <CommentCardTitle>
-                  Foysal Ahmmed
-                  <span className='username'>@foysal</span>
+                  {data?.user?.name}
+                  <span className='username'>@{data?.user?.username}</span>
                   &bull;
-                  <span className='time'>2 minutes ago</span>
+                  <span className='time'>{getTime(data?.createdAt)}</span>
                </CommentCardTitle>
-               <CommentCardDesc>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, voluptatem.</CommentCardDesc>
+               <CommentCardDesc>{data?.content}</CommentCardDesc>
                <CommentCardButtons>
                   <CommentCardLikeDislike>
-                     <Button className='like' name='64K' icon='fluent:thumb-like-24-regular' handler={() => {}} faded round />
+                     <Button
+                        className='like'
+                        name={data?.likes?.length}
+                        icon={getLikeIcon(data?.likes)}
+                        handler={infoBtnHandler('like')}
+                        faded
+                        round
+                     />
                      <span></span>
-                     <Button className='like' name='14K' icon='fluent:thumb-dislike-24-regular' handler={() => {}} faded round />
+                     <Button
+                        className='like'
+                        name={data?.dislikes?.length}
+                        icon={getDislikeIcon(data?.dislikes)}
+                        handler={infoBtnHandler('dislike')}
+                        faded
+                        round
+                     />
                   </CommentCardLikeDislike>
                   {!reply ? (
                      <Button
@@ -55,7 +96,7 @@ export default function CommentCard({ children, reply }) {
          </div>
          {open && !reply ? (
             <div className='nested'>
-               <CommentBox name='Reply' />
+               <CommentBox name='Reply' setter={setNewComment} value={newComment} />
                {children}
             </div>
          ) : null}

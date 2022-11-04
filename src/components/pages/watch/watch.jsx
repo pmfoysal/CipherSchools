@@ -29,6 +29,8 @@ import api from '@middlewares/api';
 import { toast } from 'react-toastify';
 import useGetVideos from '@servers/useGetVideos';
 import { StoreContext } from '@contexts/storeProvider';
+import useGetComments from '@servers/useGetComments';
+import WatchCommentsComp from './partials/watchComments';
 
 export default function Watch() {
    const { vId } = useParams();
@@ -197,18 +199,7 @@ export default function Watch() {
                      </span>
                      <span className='desc'>{renderDesc(newVideoData?.description)}</span>
                   </WatchDescs>
-                  <WatchComments>
-                     <WatchCommentsTitle>32 Comments</WatchCommentsTitle>
-                     <WatchCommentsCards>
-                        <CommentBox name='Comment' />
-                        <CommentCard>
-                           <CommentCard reply />
-                           <CommentCard reply />
-                        </CommentCard>
-                        <CommentCard />
-                        <CommentCard />
-                     </WatchCommentsCards>
-                  </WatchComments>
+                  <WatchCommentsComp vId={vId} />
                </WatchTexts>
             </WatchLeft>
             <WatchRight>
