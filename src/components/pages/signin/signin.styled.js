@@ -31,6 +31,10 @@ export const SigninContent = styled.div`
          cursor: pointer;
       }
    }
+
+   @media screen and (max-width: 450px) {
+      padding: 2rem;
+   }
 `;
 
 export const SigninForm = styled.div`
@@ -51,6 +55,7 @@ export const SigninTitle = styled.h1`
 export const SigninDesc = styled.p`
    margin-top: 0.5rem;
    color: rgba(0, 0, 0, 0.85);
+   text-align: center;
 `;
 
 export const SigninCheck = styled.label`
