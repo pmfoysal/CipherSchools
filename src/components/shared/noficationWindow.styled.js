@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const NotificationWindowContainer = styled.div`
+   user-select: none;
+
    .badge {
       position: absolute;
       top: 0;
@@ -46,15 +48,22 @@ export const NotificationWindowPopup = styled.div`
    top: calc(100% + 2.5rem);
    right: 0;
    padding: 1.5rem;
+   padding-right: 1rem;
    background-color: #ffffff;
    border-radius: 2rem;
    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.025);
    width: 320px;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
    z-index: 50;
+
+   & > * {
+      max-height: 45rem;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+   }
 
    button {
       height: 3.6rem;

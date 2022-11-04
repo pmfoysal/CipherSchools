@@ -49,10 +49,10 @@ export default function UserWindow() {
                <UserWindowName>{user?.name || 'Unknown'}</UserWindowName>
                <UserWindowRole>{user?.role || 'invalid'}</UserWindowRole>
                <UserWindowLinks>
-                  <UserWindowLink onClick={() => navigate('/notifications')}>
+                  {/* <UserWindowLink onClick={() => navigate('/notifications')}>
                      <Icon icon='bytesize:bell' />
                      Notifications
-                  </UserWindowLink>
+                  </UserWindowLink> */}
                   <UserWindowLink danger onClick={signoutHandler}>
                      <Icon icon='mi:log-out' />
                      Signout
