@@ -3,11 +3,15 @@ import styled from 'styled-components';
 export const SearchboxContainer = styled.div`
    display: flex;
    align-items: center;
-   width: 80%;
+   max-width: 40rem;
    margin: 0 auto;
    border-radius: 0.8rem;
    background-color: #f2f5fa;
    overflow: hidden;
+
+   @media screen and (max-width: 800px) {
+      display: none;
+   }
 `;
 
 export const SearchboxContent = styled.input`
