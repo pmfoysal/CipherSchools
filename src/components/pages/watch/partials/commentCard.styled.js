@@ -39,6 +39,14 @@ export const CommentCardTitle = styled.h1`
    display: flex;
    align-items: center;
    gap: 0.5rem;
+   white-space: nowrap;
+   flex-wrap: wrap;
+
+   .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+   }
 
    .username {
       font-weight: 400;

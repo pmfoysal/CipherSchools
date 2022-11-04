@@ -66,9 +66,11 @@ export default function CommentCard({ children, reply, data = {}, refetch, vId, 
             <CommentCardTexts>
                <CommentCardTitle>
                   {data?.user?.name}
-                  <span className='username'>@{data?.user?.username}</span>
-                  &bull;
-                  <span className='time'>{getTime(data?.createdAt)}</span>
+                  <span className='user-info'>
+                     <span className='username'>@{data?.user?.username}</span>
+                     &bull;
+                     <span className='time'>{getTime(data?.createdAt)}</span>
+                  </span>
                </CommentCardTitle>
                <CommentCardDesc>{data?.content}</CommentCardDesc>
                <CommentCardButtons>

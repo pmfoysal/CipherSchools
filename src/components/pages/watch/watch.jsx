@@ -138,17 +138,21 @@ export default function Watch() {
                   <WatchTitle>{newVideoData?.title}</WatchTitle>
                   <WatchInfos>
                      <WatchInfosLeft>
-                        <WatchInfosLeftIcon>
-                           <img src={creator} alt='user' />
-                        </WatchInfosLeftIcon>
-                        <WatchInfosLeftTexts>
-                           <h3>
-                              {newVideoData?.creator?.name} <span>@{newVideoData?.creator?.username}</span>
-                           </h3>
-                           <p>3.75M subscribers</p>
-                        </WatchInfosLeftTexts>
-                        <Button className='subscribe' name='Subscribe' loading={''} handler={() => {}} main round />
-                        <Button className='alert' icon='bi:bell' handler={() => {}} faded round />
+                        <div>
+                           <WatchInfosLeftIcon>
+                              <img src={creator} alt='user' />
+                           </WatchInfosLeftIcon>
+                           <WatchInfosLeftTexts>
+                              <h3>
+                                 {newVideoData?.creator?.name} <span>@{newVideoData?.creator?.username}</span>
+                              </h3>
+                              <p>3.75M subscribers</p>
+                           </WatchInfosLeftTexts>
+                        </div>
+                        <div>
+                           <Button className='subscribe' name='Subscribe' loading={''} handler={() => {}} main round />
+                           <Button className='alert' icon='bi:bell' handler={() => {}} faded round />
+                        </div>
                      </WatchInfosLeft>
                      <WatchInfosRight>
                         <WatchInfosLikes>
@@ -173,6 +177,7 @@ export default function Watch() {
                         <Button name={`${newVideoData?.shares} Shares`} handler={infoBtnHandler('share')} faded round />
                         <Button
                            name='Download'
+                           className='download'
                            icon='fluent:arrow-download-24-filled'
                            loading={''}
                            handler={downloadHandler(newVideoData?.title, newVideoData?.video)}

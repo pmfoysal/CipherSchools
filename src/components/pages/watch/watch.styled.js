@@ -15,6 +15,14 @@ export const WatchLeft = styled.aside`
    width: 100%;
    flex-grow: 1;
    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.025);
+
+   @media screen and (max-width: 550px) {
+      padding: 1.5rem;
+   }
+
+   @media screen and (max-width: 500px) {
+      padding: 1rem;
+   }
 `;
 
 export const WatchPlayer = styled.main`
@@ -41,12 +49,39 @@ export const WatchInfos = styled.div`
    justify-content: space-between;
    gap: 3rem;
    margin-top: 1.75rem;
+
+   @media screen and (max-width: 840px) {
+      flex-direction: column;
+      align-items: flex-start;
+
+      & > * {
+         width: 100%;
+      }
+   }
 `;
 
 export const WatchInfosLeft = styled.aside`
    display: flex;
    align-items: center;
    gap: 1.5rem;
+
+   & > * {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+   }
+
+   @media screen and (max-width: 840px) {
+      justify-content: space-between;
+   }
+
+   @media screen and (max-width: 520px) {
+      flex-wrap: wrap;
+
+      .subscribe {
+         margin-left: 0 !important;
+      }
+   }
 
    .subscribe {
       height: 3.6rem;
@@ -117,6 +152,24 @@ export const WatchInfosRight = styled.aside`
       padding: 0 2rem;
       width: unset;
       font-size: 1.4rem;
+   }
+
+   @media screen and (max-width: 1000px) {
+      .download {
+         display: none;
+      }
+   }
+
+   @media screen and (max-width: 840px) {
+      justify-content: flex-start;
+
+      .download {
+         display: flex;
+      }
+   }
+
+   @media screen and (max-width: 500px) {
+      flex-wrap: wrap;
    }
 `;
 
@@ -195,6 +248,10 @@ export const WatchCommentsCards = styled.div`
 export const WatchRight = styled.aside`
    width: 550px;
    margin-top: 2rem;
+
+   @media screen and (max-width: 1400px) {
+      display: none;
+   }
 `;
 
 export const WatchRightTop = styled.div`
