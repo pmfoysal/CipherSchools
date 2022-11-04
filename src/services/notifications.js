@@ -1,12 +1,15 @@
 const notifications = require('@models').notifications;
 
-exports.getNotifications = async query => {
+exports.getNotifications = async (uId, query) => {
    const temps = {
       page: Number(query?.page) - 1,
       limit: Number(query?.limit),
       fields: query?.fields?.replaceAll(/[, ]/g, ' '),
    };
-   const result = await notifications.find(query?.filter).sort(query?.sort).select(temps.fields);
+   const result = await notifications
+      .find({ ...query?.filter, receiver: { _id: uId } })
+      .sort(query?.sort)
+      .select(temps.fields);
    if (!result?.length) throw new Error('No notifications found with these queries');
    return {
       totalItems: result?.length,
