@@ -2,9 +2,9 @@ import Loader from '@shared/loader';
 import { toast } from 'react-toastify';
 import RequireAuth from '@helpers/requireAuth';
 import { Route, Routes } from 'react-router-dom';
-import { Home, Signin, Signup, Watch } from '@pages';
 import { StoreContext } from '@contexts/storeProvider';
 import useGetNotifications from '@servers/useGetNotifications';
+import { Home, NotFound, Signin, Signup, Upload, Watch } from '@pages';
 import React, { Suspense, useContext, useEffect, useState } from 'react';
 
 export default function App() {
@@ -35,7 +35,8 @@ export default function App() {
                <Route path='/signin' element={<Signin />} />
                <Route path='/signup' element={<Signup />} />
                <Route path='/watch/:vId' element={<RequireAuth then={<Watch />} />} />
-               <Route path='*' element={<h1>Page Not Found!</h1>} />
+               {user?.role === 'creator' ? <Route path='/upload' element={<RequireAuth then={<Upload />} />} /> : <></>}
+               <Route path='*' element={<NotFound />} />
             </Routes>
          </Suspense>
       </React.Fragment>

@@ -5,4 +5,6 @@ module.exports = {
    Watch: lazy(() => import('./watch/watch')),
    Signin: lazy(() => import('./signin/signin')),
    Signup: lazy(() => import('./signup/signup')),
+   Upload: lazy(() => import('./upload/upload')),
+   NotFound: lazy(() => import('../helpers/notFound')),
 };
