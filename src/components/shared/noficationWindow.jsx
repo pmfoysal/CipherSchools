@@ -1,5 +1,4 @@
 import { Icon } from '@iconify/react';
-import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import NotificationCard from './notificationCard';
@@ -8,10 +7,9 @@ import { NotificationWindowContainer, NotificationWindowIcon } from './noficatio
 import { NotificationWindowPopup, NotificationWindowPopupTitle } from './noficationWindow.styled';
 
 export default function NoficationWindow() {
-   const [open, setOpen] = useState(false);
    const { pathname } = useLocation();
-   const [current, setCurrent] = useState(0);
-   const { data, refetch } = useGetNotifications();
+   const [open, setOpen] = useState(false);
+   const { data, refetch } = useGetNotifications({ refetchInterval: 1000 });
 
    function openHandler() {
       setOpen(prev => !prev);
@@ -20,15 +18,6 @@ export default function NoficationWindow() {
    function getRevised(data) {
       return data?.filter(item => item?.isRead === false);
    }
-
-   useEffect(() => {
-      const diff = data?.data?.length - current;
-      if (diff > 0) {
-         const title = getRevised(data?.data)?.reverse()?.[0]?.title;
-         toast.info(title);
-         setCurrent(data?.data?.length);
-      }
-   }, [data]);
 
    useEffect(() => {
       setOpen(false);
