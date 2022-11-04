@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react';
+import getTime from '@utilities/getTime';
 import {
    NotificationCardContainer,
    NotificationCardDesc,
@@ -7,15 +8,15 @@ import {
    NotificationCardTitle,
 } from './notificationCard.styled';
 
-export default function NotificationCard() {
+export default function NotificationCard({ data }) {
    return (
       <NotificationCardContainer>
          <NotificationCardIcon>
             <Icon icon='bi:bell' />
          </NotificationCardIcon>
          <NotificationCardTexts>
-            <NotificationCardTitle>John Doe likes your video: Something went wrong!</NotificationCardTitle>
-            <NotificationCardDesc>2 minutes ago</NotificationCardDesc>
+            <NotificationCardTitle>{data?.title}</NotificationCardTitle>
+            <NotificationCardDesc>{getTime(data?.createdAt)}</NotificationCardDesc>
          </NotificationCardTexts>
       </NotificationCardContainer>
    );
