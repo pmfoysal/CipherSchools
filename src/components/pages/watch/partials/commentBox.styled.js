@@ -57,12 +57,17 @@ export const CommentBoxButtons = styled.div`
       font-size: 1.3rem;
       transition: 0.1s ease;
 
-      &:hover {
+      &:hover:not(:disabled) {
          opacity: 0.85;
       }
 
-      &:active {
+      &:active:not(:disabled) {
          transform: scale(0.975);
+      }
+
+      &:disabled {
+         opacity: 0.5;
+         cursor: default;
       }
    }
 

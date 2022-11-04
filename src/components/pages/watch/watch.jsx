@@ -1,18 +1,18 @@
+import api from '@middlewares/api';
 import Button from '@shared/button';
 import Layout from '@layouts/layout';
+import { toast } from 'react-toastify';
 import getTime from '@utilities/getTime';
-import CommentBox from './partials/commentBox';
+import { useParams } from 'react-router-dom';
 import useGetVideo from '@servers/useGetVideo';
 import SuggestCard from './partials/suggestCard';
-import CommentCard from './partials/commentCard';
-import { useParams } from 'react-router-dom';
+import useGetVideos from '@servers/useGetVideos';
+import { StoreContext } from '@contexts/storeProvider';
+import WatchCommentsComp from './partials/watchComments';
 import creator from '../../../assets/images/creator.png';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import { WatchPlayer, WatchRight, WatchRightCards, WatchRightTitle, WatchTexts, WatchTitle } from './watch.styled';
 import {
-   WatchComments,
-   WatchCommentsCards,
-   WatchCommentsTitle,
    WatchContainer,
    WatchDescs,
    WatchInfos,
@@ -25,12 +25,6 @@ import {
    WatchRightBottom,
    WatchRightTop,
 } from './watch.styled';
-import api from '@middlewares/api';
-import { toast } from 'react-toastify';
-import useGetVideos from '@servers/useGetVideos';
-import { StoreContext } from '@contexts/storeProvider';
-import useGetComments from '@servers/useGetComments';
-import WatchCommentsComp from './partials/watchComments';
 
 export default function Watch() {
    const { vId } = useParams();
@@ -199,7 +193,7 @@ export default function Watch() {
                      </span>
                      <span className='desc'>{renderDesc(newVideoData?.description)}</span>
                   </WatchDescs>
-                  <WatchCommentsComp vId={vId} />
+                  <WatchCommentsComp vId={vId} user={user} />
                </WatchTexts>
             </WatchLeft>
             <WatchRight>

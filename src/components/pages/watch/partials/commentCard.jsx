@@ -1,5 +1,5 @@
 import Button from '@shared/button';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import userImg from '../../../../assets/images/user.png';
 import creatorImg from '../../../../assets/images/creator.png';
 import {
@@ -16,8 +16,9 @@ import CommentBox from './commentBox';
 import getTime from '@utilities/getTime';
 import { StoreContext } from '@contexts/storeProvider';
 
-export default function CommentCard({ children, reply, data = {}, refetch, vId }) {
+export default function CommentCard({ children, reply, data = {}, refetch, vId, replyId }) {
    const [open, setOpen] = useState(false);
+   const [disable, setDisable] = useState(true);
    const { user } = useContext(StoreContext);
    const [newComment, setNewComment] = useState('');
 
@@ -45,6 +46,19 @@ export default function CommentCard({ children, reply, data = {}, refetch, vId }
       }
       return 'fluent:thumb-dislike-24-regular';
    }
+
+   async function replyHandler() {
+      setDisable(true);
+      await api.post(`/videos/${vId}/comments/${replyId}/reply`, { content: newComment });
+      setDisable(false);
+      setNewComment('');
+      refetch();
+   }
+
+   useEffect(() => {
+      if (newComment) setDisable(false);
+      else setDisable(true);
+   }, [newComment]);
 
    return (
       <CommentCardContainer>
@@ -96,7 +110,14 @@ export default function CommentCard({ children, reply, data = {}, refetch, vId }
          </div>
          {open && !reply ? (
             <div className='nested'>
-               <CommentBox name='Reply' setter={setNewComment} value={newComment} />
+               <CommentBox
+                  name='Reply'
+                  setter={setNewComment}
+                  value={newComment}
+                  handler={replyHandler}
+                  user={user}
+                  disable={disable}
+               />
                {children}
             </div>
          ) : null}
