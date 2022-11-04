@@ -1,3 +1,4 @@
+import getTime from '@utilities/getTime';
 import { useNavigate } from 'react-router-dom';
 import {
    SuggestCardAuthor,
@@ -8,21 +9,20 @@ import {
    SuggestCardTitle,
 } from './suggestCard.styled';
 
-export default function SuggestCard() {
+export default function SuggestCard({ data = {} }) {
    const navigate = useNavigate();
 
    return (
-      <SuggestCardContainer onClick={() => {}}>
+      <SuggestCardContainer onClick={() => navigate(`/watch/${data?._id}`)}>
          <SuggestCardImage>
-            <img
-               src='https://raw.githubusercontent.com/pmfoysal/data/main/vidplayer/images/day-2-recap-thumnail.jpg'
-               alt='thumbnail'
-            />
+            <img src={data?.thumbnail} alt='thumbnail' />
          </SuggestCardImage>
          <SuggestCardTexts>
-            <SuggestCardTitle>WWDC22: Day 2 Recap - Apple</SuggestCardTitle>
-            <SuggestCardAuthor title='@foysal'>Foysal Ahmmed</SuggestCardAuthor>
-            <SuggestCardInfo>24K views &bull; 2 minutes ago</SuggestCardInfo>
+            <SuggestCardTitle>{data?.title}</SuggestCardTitle>
+            <SuggestCardAuthor title={`@${data?.creator?.username}`}>{data?.creator?.name}</SuggestCardAuthor>
+            <SuggestCardInfo>
+               {data?.views} views &bull; {getTime(data?.createdAt)}
+            </SuggestCardInfo>
          </SuggestCardTexts>
       </SuggestCardContainer>
    );
