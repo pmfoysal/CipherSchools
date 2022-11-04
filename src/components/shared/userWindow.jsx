@@ -9,8 +9,8 @@ import { UserWindowLinks, UserWindowName, UserWindowPopup, UserWindowRole } from
 import { UserWindowContainer, UserWindowImage, UserWindowImg, UserWindowLink } from './userWindow.styled';
 
 export default function UserWindow() {
-   const location = useLocation();
    const navigate = useNavigate();
+   const { pathname } = useLocation();
    const [open, setOpen] = useState(false);
    const { user, setUser } = useContext(StoreContext);
    const student = user?.role === 'student';
@@ -30,7 +30,7 @@ export default function UserWindow() {
 
    useEffect(() => {
       setOpen(false);
-   }, [location]);
+   }, [pathname]);
 
    return (
       <UserWindowContainer>

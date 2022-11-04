@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import NotificationCard from './notificationCard';
 import useGetNotifications from '@servers/useGetNotifications';
 import { NotificationWindowContainer, NotificationWindowIcon } from './noficationWindow.styled';
@@ -8,6 +9,7 @@ import { NotificationWindowPopup, NotificationWindowPopupTitle } from './noficat
 
 export default function NoficationWindow() {
    const [open, setOpen] = useState(false);
+   const { pathname } = useLocation();
    const [current, setCurrent] = useState(0);
    const { data, refetch } = useGetNotifications();
 
@@ -27,6 +29,10 @@ export default function NoficationWindow() {
          setCurrent(data?.data?.length);
       }
    }, [data]);
+
+   useEffect(() => {
+      setOpen(false);
+   }, [pathname]);
 
    return (
       <NotificationWindowContainer>
