@@ -70,6 +70,11 @@ export const NotificationWindowPopup = styled.div`
       font-size: 1.3rem;
       margin-top: 1.25rem;
    }
+
+   @media screen and (max-width: 450px) {
+      width: calc(100vw - 4rem);
+      right: -8rem;
+   }
 `;
 
 export const NotificationWindowPopupTitle = styled.h1`

@@ -6,6 +6,14 @@ export const HomeContainer = styled.section`
    padding: 2.5rem;
    border-radius: 2rem;
    margin: 2rem 0 3rem;
+
+   @media screen and (max-width: 600px) {
+      padding: 2.5rem 2rem;
+   }
+
+   @media screen and (max-width: 450px) {
+      padding: 2.5rem 1rem;
+   }
 `;
 
 export const HomeTitle = styled.h1`
@@ -21,4 +29,22 @@ export const HomeCards = styled.div`
    display: grid;
    grid-template-columns: repeat(4, 1fr);
    gap: 2.5rem;
+
+   @media screen and (max-width: 1420px) {
+      grid-template-columns: repeat(3, 1fr);
+   }
+
+   @media screen and (max-width: 1080px) {
+      grid-template-columns: repeat(2, 1fr);
+   }
+
+   @media screen and (max-width: 760px) {
+      grid-template-columns: repeat(1, 1fr);
+      align-items: center;
+      justify-items: center;
+
+      & > * {
+         max-width: 50rem;
+      }
+   }
 `;
