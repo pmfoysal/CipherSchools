@@ -41,10 +41,10 @@ export default function UserWindow() {
                <UserWindowName>{user?.name || 'Unknown'}</UserWindowName>
                <UserWindowRole>{user?.role || 'invalid'}</UserWindowRole>
                <UserWindowLinks>
-                  {/* <UserWindowLink onClick={() => navigate('/notifications')}>
-                     <Icon icon='bytesize:bell' />
-                     Notifications
-                  </UserWindowLink> */}
+                  <UserWindowLink onClick={() => navigate('/upload')}>
+                     <Icon icon='fluent:video-add-24-regular' />
+                     Add video
+                  </UserWindowLink>
                   <UserWindowLink danger onClick={signoutHandler}>
                      <Icon icon='mi:log-out' />
                      Signout
