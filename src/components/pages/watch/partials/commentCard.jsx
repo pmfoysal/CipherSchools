@@ -1,26 +1,21 @@
 import Button from '@shared/button';
-import { useContext, useEffect, useState } from 'react';
-import userImg from '../../../../assets/images/user.png';
-import creatorImg from '../../../../assets/images/creator.png';
-import {
-   CommentCardButtons,
-   CommentCardContainer,
-   CommentCardDesc,
-   CommentCardIcon,
-   CommentCardLikeDislike,
-   CommentCardTexts,
-   CommentCardTitle,
-} from './commentCard.styled';
 import api from '@middlewares/api';
 import CommentBox from './commentBox';
 import getTime from '@utilities/getTime';
 import { StoreContext } from '@contexts/storeProvider';
+import { useContext, useEffect, useState } from 'react';
+import userImg from '../../../../assets/images/user.png';
+import useGetNotifications from '@servers/useGetNotifications';
+import creatorImg from '../../../../assets/images/creator.png';
+import { CommentCardButtons, CommentCardContainer, CommentCardLikeDislike } from './commentCard.styled';
+import { CommentCardDesc, CommentCardIcon, CommentCardTexts, CommentCardTitle } from './commentCard.styled';
 
 export default function CommentCard({ children, reply, data = {}, refetch, vId, replyId }) {
    const [open, setOpen] = useState(false);
    const [disable, setDisable] = useState(true);
    const { user } = useContext(StoreContext);
    const [newComment, setNewComment] = useState('');
+   const { refetch: refetchNotifications } = useGetNotifications();
 
    function openHandler() {
       setOpen(prev => !prev);
@@ -30,6 +25,7 @@ export default function CommentCard({ children, reply, data = {}, refetch, vId, 
       return async function () {
          await api.post(`/videos/${vId}/comments/${data?._id}/${name}`);
          if (refetch) refetch();
+         refetchNotifications();
       };
    }
 
@@ -53,6 +49,7 @@ export default function CommentCard({ children, reply, data = {}, refetch, vId, 
       setDisable(false);
       setNewComment('');
       refetch();
+      refetchNotifications();
    }
 
    useEffect(() => {

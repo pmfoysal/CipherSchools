@@ -10,21 +10,13 @@ import useGetVideos from '@servers/useGetVideos';
 import { StoreContext } from '@contexts/storeProvider';
 import WatchCommentsComp from './partials/watchComments';
 import creator from '../../../assets/images/creator.png';
+import useGetNotifications from '@servers/useGetNotifications';
 import { Fragment, useContext, useEffect, useState } from 'react';
-import { WatchPlayer, WatchRight, WatchRightCards, WatchRightTitle, WatchTexts, WatchTitle } from './watch.styled';
-import {
-   WatchContainer,
-   WatchDescs,
-   WatchInfos,
-   WatchInfosLeft,
-   WatchInfosLeftIcon,
-   WatchInfosLeftTexts,
-   WatchInfosLikes,
-   WatchInfosRight,
-   WatchLeft,
-   WatchRightBottom,
-   WatchRightTop,
-} from './watch.styled';
+import { WatchRightTop, WatchInfosLeftTexts } from './watch.styled';
+import { WatchRightTitle, WatchTexts, WatchTitle } from './watch.styled';
+import { WatchPlayer, WatchRight, WatchRightCards } from './watch.styled';
+import { WatchInfosLikes, WatchInfosRight, WatchLeft, WatchRightBottom } from './watch.styled';
+import { WatchContainer, WatchDescs, WatchInfos, WatchInfosLeft, WatchInfosLeftIcon } from './watch.styled';
 
 export default function Watch() {
    const { vId } = useParams();
@@ -34,6 +26,7 @@ export default function Watch() {
 
    const { data: videosData } = useGetVideos();
    const { data: videoData } = useGetVideo(vId, { enabled: !!vId });
+   const { refetch: refetchNotifications } = useGetNotifications();
 
    function infoBtnHandler(name) {
       return async function () {
@@ -73,6 +66,7 @@ export default function Watch() {
             }
          });
          await api.post(`/videos/${vId}/${name}`);
+         refetchNotifications();
       };
    }
 

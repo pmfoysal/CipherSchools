@@ -5,16 +5,8 @@ import { StoreContext } from '@contexts/storeProvider';
 import { useContext, useEffect, useState } from 'react';
 import creatorImg from '../../assets/images/creator.png';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-   UserWindowContainer,
-   UserWindowImage,
-   UserWindowImg,
-   UserWindowLink,
-   UserWindowLinks,
-   UserWindowName,
-   UserWindowPopup,
-   UserWindowRole,
-} from './userWindow.styled';
+import { UserWindowLinks, UserWindowName, UserWindowPopup, UserWindowRole } from './userWindow.styled';
+import { UserWindowContainer, UserWindowImage, UserWindowImg, UserWindowLink } from './userWindow.styled';
 
 export default function UserWindow() {
    const location = useLocation();

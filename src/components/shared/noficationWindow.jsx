@@ -1,17 +1,15 @@
-import { useState } from 'react';
 import { Icon } from '@iconify/react';
+import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 import NotificationCard from './notificationCard';
 import useGetNotifications from '@servers/useGetNotifications';
-import {
-   NotificationWindowContainer,
-   NotificationWindowIcon,
-   NotificationWindowPopup,
-   NotificationWindowPopupTitle,
-} from './noficationWindow.styled';
+import { NotificationWindowContainer, NotificationWindowIcon } from './noficationWindow.styled';
+import { NotificationWindowPopup, NotificationWindowPopupTitle } from './noficationWindow.styled';
 
 export default function NoficationWindow() {
    const [open, setOpen] = useState(false);
-   const { data, refetch } = useGetNotifications({ refetchInterval: 2000 });
+   const [current, setCurrent] = useState(0);
+   const { data, refetch } = useGetNotifications();
 
    function openHandler() {
       setOpen(prev => !prev);
@@ -20,6 +18,15 @@ export default function NoficationWindow() {
    function getRevised(data) {
       return data?.filter(item => item?.isRead === false);
    }
+
+   useEffect(() => {
+      const diff = data?.data?.length - current;
+      if (diff > 0) {
+         const title = getRevised(data?.data)?.reverse()?.[0]?.title;
+         toast.info(title);
+         setCurrent(data?.data?.length);
+      }
+   }, [data]);
 
    return (
       <NotificationWindowContainer>
@@ -31,7 +38,7 @@ export default function NoficationWindow() {
             <NotificationWindowPopup>
                <NotificationWindowPopupTitle>Notifications</NotificationWindowPopupTitle>
                <div>
-                  {data?.data?.map(item => (
+                  {[...data?.data].reverse().map(item => (
                      <NotificationCard key={item?._id} data={item} refetch={refetch} />
                   ))}
                </div>

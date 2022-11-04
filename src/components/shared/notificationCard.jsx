@@ -1,14 +1,8 @@
 import api from '@middlewares/api';
 import { Icon } from '@iconify/react';
 import getTime from '@utilities/getTime';
-import {
-   NotificationButtons,
-   NotificationCardContainer,
-   NotificationCardDesc,
-   NotificationCardIcon,
-   NotificationCardTexts,
-   NotificationCardTitle,
-} from './notificationCard.styled';
+import { NotificationCardIcon, NotificationCardTexts, NotificationCardTitle } from './notificationCard.styled';
+import { NotificationButtons, NotificationCardContainer, NotificationCardDesc } from './notificationCard.styled';
 
 export default function NotificationCard({ data, refetch }) {
    async function readHandler() {

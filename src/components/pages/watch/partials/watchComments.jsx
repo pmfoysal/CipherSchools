@@ -1,12 +1,14 @@
+import api from '@middlewares/api';
 import CommentBox from './commentBox';
 import CommentCard from './commentCard';
-import useGetComments from '@servers/useGetComments';
-import { WatchComments, WatchCommentsCards, WatchCommentsTitle } from '../watch.styled';
-import api from '@middlewares/api';
 import { useEffect, useState } from 'react';
+import useGetComments from '@servers/useGetComments';
+import useGetNotifications from '@servers/useGetNotifications';
+import { WatchComments, WatchCommentsCards, WatchCommentsTitle } from '../watch.styled';
 
 export default function WatchCommentsComp({ vId, user }) {
    const { data, refetch } = useGetComments(vId, { enabled: !!vId });
+   const { refetch: refetchNotifications } = useGetNotifications();
    const [newComment, setNewComment] = useState('');
    const [disable, setDisable] = useState(true);
 
@@ -30,6 +32,7 @@ export default function WatchCommentsComp({ vId, user }) {
       setDisable(false);
       setNewComment('');
       refetch();
+      refetchNotifications();
    }
 
    useEffect(() => {

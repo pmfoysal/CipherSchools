@@ -1,13 +1,7 @@
 import getTime from '@utilities/getTime';
 import { useNavigate } from 'react-router-dom';
-import {
-   SuggestCardAuthor,
-   SuggestCardContainer,
-   SuggestCardImage,
-   SuggestCardInfo,
-   SuggestCardTexts,
-   SuggestCardTitle,
-} from './suggestCard.styled';
+import { SuggestCardInfo, SuggestCardTexts, SuggestCardTitle } from './suggestCard.styled';
+import { SuggestCardAuthor, SuggestCardContainer, SuggestCardImage } from './suggestCard.styled';
 
 export default function SuggestCard({ data = {} }) {
    const navigate = useNavigate();

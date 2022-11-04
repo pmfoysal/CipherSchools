@@ -1,6 +1,7 @@
 import userImg from '../../../../assets/images/user.png';
 import creatorImg from '../../../../assets/images/creator.png';
-import { CommentBoxButtons, CommentBoxContainer, CommentBoxContent, CommentBoxIcon, CommentBoxInput } from './commentBox.styled';
+import { CommentBoxIcon, CommentBoxInput } from './commentBox.styled';
+import { CommentBoxButtons, CommentBoxContainer, CommentBoxContent } from './commentBox.styled';
 
 export default function CommentBox({ name, user, value, setter, handler, disable }) {
    return (

@@ -1,16 +1,8 @@
 import getTime from '@utilities/getTime';
 import { useNavigate } from 'react-router-dom';
 import creator from '../../../../assets/images/creator.png';
-import {
-   VideoCardAuthor,
-   VideoCardContainer,
-   VideoCardDetails,
-   VideoCardIcon,
-   VideoCardImage,
-   VideoCardInfo,
-   VideoCardTexts,
-   VideoCardTitle,
-} from './videoCard.styled';
+import { VideoCardAuthor, VideoCardDetails, VideoCardIcon, VideoCardImage } from './videoCard.styled';
+import { VideoCardContainer, VideoCardInfo, VideoCardTexts, VideoCardTitle } from './videoCard.styled';
 
 export default function VideoCard({ data = {} }) {
    const navigate = useNavigate();
